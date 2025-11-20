@@ -1,0 +1,7 @@
+export { Home } from './Home'
+export { About } from './About'
+export { Places } from './Places'
+export { Stays } from './Stays'
+export { Viewpoints } from './Viewpoints'
+export { Restaurants } from './Restaurants'
+export { Contact } from './Contact'
