@@ -1,7 +1,7 @@
 import { useTheme } from '../contexts/ThemeContext'
 import { CheckCircle, Globe, Zap, Heart } from 'lucide-react'
 
-export const About = () => {
+export function About() {
   const { theme } = useTheme()
 
   const highlights = [
@@ -120,3 +120,5 @@ export const About = () => {
     </div>
   )
 }
+
+export default About

@@ -1,32 +1,23 @@
 import { useTheme } from '../contexts/ThemeContext'
-import { Button } from '../components/Button'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '../components/Button'
 
-export const Contact = () => {
+export function Contact() {
   const { theme } = useTheme()
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
-    
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData)
-      setSubmitted(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      setIsLoading(false)
-      
-      // Reset success message after 3 seconds
-      setTimeout(() => setSubmitted(false), 3000)
-    }, 1000)
+    console.log('Form submitted:', formData)
+    setSubmitted(true)
+    setFormData({ name: '', email: '', subject: '', message: '' })
+    setTimeout(() => setSubmitted(false), 3000)
   }
 
   return (
@@ -56,12 +47,6 @@ export const Contact = () => {
           {/* Contact Form */}
           <div className="animate-slide-in-left">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {submitted && (
-                <div className="p-4 bg-green-500/20 border border-green-500 text-green-600 rounded-lg animate-fade-in">
-                  ✓ Message sent successfully! We'll get back to you soon.
-                </div>
-              )}
-              
               <div>
                 <label className={`block font-semibold mb-2 ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
@@ -146,7 +131,13 @@ export const Contact = () => {
                 />
               </div>
 
-              <Button type="submit" size="lg" isLoading={isLoading} className="w-full">
+              {submitted && (
+                <div className="p-4 bg-green-500/20 border-2 border-green-500 rounded-lg text-green-600 dark:text-green-400 animate-fade-in">
+                  ✓ Thank you! Your message has been sent successfully.
+                </div>
+              )}
+
+              <Button type="submit" size="lg" className="w-full">
                 <Send size={20} />
                 Send Message
               </Button>
@@ -166,11 +157,12 @@ export const Contact = () => {
                   }`}>
                     Phone
                   </h3>
-                  <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                    <a href="tel:+919876543210" className="hover:text-blue-500 transition-colors">
-                      +91 98765 43210
-                    </a>
-                  </p>
+                  <a 
+                    href="tel:+919876543210"
+                    className={`${theme === 'dark' ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors`}
+                  >
+                    +91 98765 43210
+                  </a>
                 </div>
               </div>
             </div>
@@ -186,11 +178,12 @@ export const Contact = () => {
                   }`}>
                     Email
                   </h3>
-                  <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                    <a href="mailto:info@lavasa.com" className="hover:text-blue-500 transition-colors">
-                      info@lavasa.com
-                    </a>
-                  </p>
+                  <a 
+                    href="mailto:info@lavasa.com"
+                    className={`${theme === 'dark' ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition-colors`}
+                  >
+                    info@lavasa.com
+                  </a>
                 </div>
               </div>
             </div>
@@ -206,28 +199,27 @@ export const Contact = () => {
                   }`}>
                     Location
                   </h3>
-                  <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
                     Lavasa, Mulshi Taluka<br />
                     Pune District, Maharashtra<br />
-                    India 412115
+                    India 412113
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Hours */}
             <div className={`p-6 rounded-lg transition-colors duration-300 ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
             }`}>
               <h3 className={`font-bold text-lg mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-gray-900'
               }`}>
-                Business Hours
+                Operating Hours
               </h3>
               <div className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p>Saturday: 10:00 AM - 4:00 PM</p>
-                <p>Sunday: Closed</p>
+                <p><span className="font-semibold">Monday - Friday:</span> 9:00 AM - 6:00 PM</p>
+                <p><span className="font-semibold">Saturday:</span> 10:00 AM - 4:00 PM</p>
+                <p><span className="font-semibold">Sunday:</span> Closed</p>
               </div>
             </div>
           </div>
@@ -235,13 +227,9 @@ export const Contact = () => {
       </div>
 
       {/* Map Section */}
-      <div className={`py-20 px-4 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
-      }`}>
+      <div className={`py-20 px-4 transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto">
-          <h2 className={`text-3xl font-bold mb-8 text-center ${
-            theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 className={`text-3xl font-bold mb-8 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
             Our Location
           </h2>
           <div className="rounded-lg overflow-hidden shadow-lg h-96 bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
@@ -254,3 +242,4 @@ export const Contact = () => {
     </div>
   )
 }
+export default Contact

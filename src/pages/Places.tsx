@@ -35,7 +35,7 @@ const places = [
   }
 ]
 
-export const Places = () => {
+export function Places() {
   const { theme } = useTheme()
 
   return (
@@ -79,3 +79,5 @@ export const Places = () => {
     </div>
   )
 }
+
+export default Places

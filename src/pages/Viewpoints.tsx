@@ -42,7 +42,7 @@ const viewpoints = [
   }
 ]
 
-export const Viewpoints = () => {
+export function Viewpoints() {
   const { theme } = useTheme()
 
   return (
@@ -126,3 +126,5 @@ export const Viewpoints = () => {
     </div>
   )
 }
+
+export default Viewpoints
