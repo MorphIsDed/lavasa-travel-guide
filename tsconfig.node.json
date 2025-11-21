@@ -4,7 +4,8 @@
     "target": "ES2023",
     "lib": ["ES2023"],
     "module": "ESNext",
-    "types": ["node"],
+    // removed explicit "node" type to avoid "Cannot find type definition file for 'node'".
+    // If you need Node types, install them with: npm install -D @types/node
     "skipLibCheck": true,
     "composite": true,
     "allowSyntheticDefaultImports": true,
